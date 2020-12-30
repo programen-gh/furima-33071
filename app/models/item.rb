@@ -16,6 +16,7 @@ class Item < ApplicationRecord
     validates :days_to_delivery_id
   end
 
+  belongs_to :user
   belongs_to :category
   belongs_to :condition
   belongs_to :delivery_burden
