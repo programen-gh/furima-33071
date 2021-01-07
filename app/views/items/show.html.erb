@@ -35,11 +35,15 @@
         <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
       <% else %>
 
-        <% @orders.each do |order| %>
-          <% if @item.id == order.item_id %>
-            <% break %>
-          <% else %>
-            <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
+        <% if @orders.blank? %>
+          <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
+        <% else %>
+          <% @orders.each do |order| %>
+            <% if @item.id == order.item_id %>
+              <% break %>
+            <% else %>
+              <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
+            <% end %>
           <% end %>
         <% end %>
         
