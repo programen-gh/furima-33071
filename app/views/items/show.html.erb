@@ -29,24 +29,28 @@
     </div>
 
     <% if user_signed_in? %>
-      <% if current_user.id == @item.user.id %>
-        <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-        <p class='or-text'>or</p>
-        <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
-      <% else %>
-
-        <% if @orders.blank? %>
-          <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
+      <% if @orders.blank? %>
+        <% if current_user.id == @item.user.id %>
+          <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+          <p class='or-text'>or</p>
+          <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
         <% else %>
-          <% @orders.each do |order| %>
-            <% if @item.id == order.item_id %>
-              <% break %>
+          <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
+        <% end %>
+      <% else %>
+        <% @orders.each do |order| %>
+          <% if @item.id == order.item_id %>
+            <% break %>
+          <% else %>
+            <% if current_user.id == @item.user.id %>
+              <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+              <p class='or-text'>or</p>
+              <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
             <% else %>
               <%= link_to '購入画面に進む', item_orders_path(@item.id), method: :get, class:"item-red-btn"%>
             <% end %>
           <% end %>
         <% end %>
-        
       <% end %>
     <% end %>
 
