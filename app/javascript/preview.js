@@ -5,6 +5,8 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )){
     const createImageHTML = (blob) => {
       const imageElement = document.createElement('div');
       const blobImage = document.createElement('img');
+      blobImage.width = 250;
+      blobImage.height = 250;
 
       blobImage.setAttribute('src', blob);
       imageElement.appendChild(blobImage);
